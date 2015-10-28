@@ -1,0 +1,28 @@
+{
+  "name": "Leaflet.jsonStream",
+  "main": "Leaflet.jsonStream.js",
+  "homepage": "https://github.com/robertleeplummerjr/Leaflet.jsonStream",
+  "authors": [
+    "Robert Plummer <robertleeplummerjr@gmail.com>"
+  ],
+  "description": "load large json data into Leaflet at breakneck speed using web workers",
+  "moduleType": [],
+  "keywords": [
+    "leaflet",
+    "json",
+    "geojson"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "leaflet-ajax": "~2.0.0",
+    "leaflet": "~0.7.7",
+    "operative": "~0.4.4"
+  }
+}

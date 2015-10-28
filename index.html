@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaflet.jsonStream</title>
+</head>
+<body>
+
+</body>
+<script src="bower_components/leaflet/dist/leaflet.js"></script>
+<script src="bower_components/operative/dist/operative.min.js"></script>
+<script src="leaflet.jsonstream.js"></script>
+<script>
+  var data = [];
+  L.jsonStream({
+    url: 'test.json',
+    each: function(json) {
+      data.push(json);
+    },
+    done: function() {
+      console.log(data);
+    }
+  }).load();
+</script>
+</html>
