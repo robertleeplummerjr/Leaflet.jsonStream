@@ -1,0 +1,31 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Willis Tower"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -87.6381089,
+                    41.8788804
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Flat Iron Building"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -73.9918926,
+                    40.7410645
+                ]
+            }
+        }
+    ]
+}

@@ -9,6 +9,10 @@ L.jsonStream = (function(L) {
         this.setDefaults(settings);
     }
 
+    function jsonStream(settings) {
+        return new L.JSONStream(settings);
+    }
+
     JSONStream.defaults = {
         url: '',
         each: null,
@@ -33,7 +37,29 @@ L.jsonStream = (function(L) {
                 callback('done');
             };
             request.send();
+        },
+        streamGeo: function(url, callback) {
+            var request = new XMLHttpRequest();
+            request.open("GET", url);
+            request.onload = function() {
+                var json = JSON.parse(request.responseText),
+                    features = json.features,
+                    i = 0,
+                    max = features.length;
+                for (; i < max; i++) {
+                    callback('each', JSON.stringify(features[i]));
+                }
+                callback('done');
+            };
+            request.send();
         }
+    };
+
+    jsonStream.newGeo = function() {
+        return {
+            type: "FeatureCollection",
+            features: []
+        };
     };
 
     JSONStream.prototype = {
@@ -102,7 +128,25 @@ L.jsonStream = (function(L) {
             thread.stream(operative.getBaseURL() + settings.url, function(methodName, jsonString) {
                 var method = settings[methodName];
                 if (typeof method === 'function') {
-                    if (jsonString) {
+                    if (jsonString !== undefined) {
+                        method(JSON.parse(jsonString));
+                    } else {
+                        method();
+                    }
+                }
+            });
+
+            return this;
+        },
+
+        loadGeo: function() {
+            var thread = this.thread(),
+                settings = this.settings;
+
+            thread.streamGeo(operative.getBaseURL() + settings.url, function(methodName, jsonString) {
+                var method = settings[methodName];
+                if (typeof method === 'function') {
+                    if (jsonString !== undefined) {
                         method(JSON.parse(jsonString));
                     } else {
                         method();
@@ -116,7 +160,5 @@ L.jsonStream = (function(L) {
 
     L.JSONStream = JSONStream;
 
-    return function(settings) {
-        return new L.JSONStream(settings);
-    };
+    return jsonStream;
 })(L);

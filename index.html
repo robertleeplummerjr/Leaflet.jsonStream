@@ -11,7 +11,10 @@
 <script src="bower_components/operative/dist/operative.min.js"></script>
 <script src="leaflet.jsonstream.js"></script>
 <script>
-  var data = [];
+  var data = [],
+      geo = L.jsonStream.newGeo(),
+      features = geo.features;
+
   L.jsonStream({
     url: 'test.json',
     each: function(json) {
@@ -21,5 +24,15 @@
       console.log(data);
     }
   }).load();
+
+  L.jsonStream({
+    url: 'test-geo.json',
+    each: function(feature) {
+      features.push(feature);
+    },
+    done: function() {
+      console.log(geo);
+    }
+  }).loadGeo();
 </script>
 </html>
