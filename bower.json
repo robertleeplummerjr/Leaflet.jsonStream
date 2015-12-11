@@ -21,8 +21,10 @@
     "tests"
   ],
   "dependencies": {
-    "leaflet-ajax": "~2.0.0",
     "leaflet": "~0.7.7",
     "operative": "~0.4.4"
+  },
+  "devDependependencies": {
+    "leaflet-ajax": "~2.0.0"
   }
 }
